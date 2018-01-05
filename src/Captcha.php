@@ -8,6 +8,8 @@
 
 namespace NovaStar\Captcha;
 
+use Intervention\Image\ImageManager;
+
 class Captcha
 {
 
@@ -24,6 +26,10 @@ class Captcha
         $img->image_width = 230;
         $img->image_height = 60;
         $img->num_lines = mt_rand(3, 4);
-        return $img->show( 'backgrounds/bg4.jpg');
+        $res = $img->show( 'backgrounds/bg4.jpg');
+
+        $manager = new ImageManager(array('driver' => 'gd'));
+        $image = $manager->make($res);
+        $image->save('/data/www/captcha/test.png');
     }
 }
