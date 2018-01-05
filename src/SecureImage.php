@@ -1763,7 +1763,7 @@ class SecureImage
             $this->addSignature();
         }
         return $this->im;
-        $this->output();
+//        $this->output();
     }
 
     /**
