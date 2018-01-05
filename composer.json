@@ -1,0 +1,20 @@
+{
+    "name": "novastar/captcha",
+    "description": "PHP image captcha",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vance Chang",
+            "email": "turncypher@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "NovaStar\\Captcha\\": "src/"
+        }
+    },
+    "require": {
+        "intervention/image": "~2.2"
+    }
+}
