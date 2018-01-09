@@ -12,7 +12,16 @@ use Intervention\Image\ImageManager;
 
 class Captcha
 {
-    private $config;
+    private $config = [
+        'ttf_file' => __DIR__ . '/../assets/' . 'AHGBold.ttf',
+        'wordlist_file' => __DIR__ . '/../assets/words/' . 'words.txt',
+        'perturbation' => 0.5,
+        'image_width' => 230,
+        'image_height' => 60,
+        'num_lines' => 3,
+        'background' => __DIR__ . '/../assets/words/backgrounds/' . 'bg4.jpg',
+        'captcha_type' => 'random'
+    ];
 
     private $captchaTypes = [
         SecureImage::SI_CAPTCHA_MATHEMATIC,
@@ -23,25 +32,13 @@ class Captcha
      * Captcha constructor.
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
-        $config = [
-            'ttf_file' => 'AHGBold.ttf',
-            'wordlist_file' => 'words.txt',
-            'perturbation'  => 0.5,
-            'image_width'  => 230,
-            'image_height'  => 60,
-            'num_lines'  => 3,
-            'background' => 'bg4.jpg',
-            'captcha_type' => 'random'
-        ];
-        if ($config['captcha_type'] == 'random') {
-            $config['captcha_type'] = $this->captchaTypes[array_rand($this->captchaTypes)];
+        $this->config = array_replace($this->config, $config);
+        if ($this->config['captcha_type'] == 'random') {
+            $this->config['captcha_type'] = $this->captchaTypes[array_rand($this->captchaTypes)];
         }
-        $config['ttf_file'] = __DIR__ . '/../assets/' . $config['ttf_file'];
-        $config['wordlist_file'] = __DIR__ . '/../assets/words/' . $config['wordlist_file'];
-        $config['background'] = __DIR__ . '/../assets/backgrounds/' . $config['background'];
-        $this->config = $config;
+
     }
 
     public function getCaptcha()
@@ -55,7 +52,7 @@ class Captcha
 
     public function check($captcha)
     {
-        $img = new SecureImage();
+        $img = new SecureImage($this->config);
         return $img->check($captcha);
     }
 }
