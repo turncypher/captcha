@@ -19,7 +19,7 @@ class Captcha
         'image_width' => 230,
         'image_height' => 60,
         'num_lines' => 3,
-        'background' => __DIR__ . '/../assets/words/backgrounds/' . 'bg4.jpg',
+        'background' => __DIR__ . '/../assets/backgrounds/' . 'bg4.jpg',
         'captcha_type' => 'random'
     ];
 
